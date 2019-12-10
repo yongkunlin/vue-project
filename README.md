@@ -1,6 +1,7 @@
 # vue-project
 
 > vue project
+> https://github.com/yongkunlin/vue-project.git
 
 ## Build Setup
 

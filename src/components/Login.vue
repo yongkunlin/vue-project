@@ -43,18 +43,20 @@
 
             }
         },
-        mounted() {
+        created() { // html加载完成之前，执行。执行顺序：父组件-子组件
+
+        },
+        mounted() { // html加载完成后执行。执行顺序：子组件-父组件
             // 监听按键
             document.onkeydown = (event) => {
-                var router = this.$route.path;
                 var e = event || window.event || arguments.callee.caller.arguments[0];
-                if (e && e.keyCode == 13 && this.$route.path == '/login') { // enter 键
+                if (e && e.keyCode === 13 && this.$route.path === '/login') { // enter 键
                     this.login();
                 }
             };
             this.test();
         },
-        methods: {
+        methods: { // 事件方法执行
             login() {
                 //调用后端登陆接口
                 apis.shiroApi.loginIn(this.formLogin)
@@ -62,7 +64,7 @@
                         console.log('success:', data);
                         if (data && data.data) {
                             var json = data.data;
-                            if (json.status == 'SUCCESS') {
+                            if (json.status === 'SUCCESS') {
                                 this.$common.setSessionStorage('token', json.data.userInfo.token);
                                 this.$common.setSessionStorage('username', json.data.userInfo.userName);
                                 this.$common.setSessionStorage('lev', json.data.sysRoleVoList);
@@ -72,13 +74,6 @@
                                 //动态设置路由
                                 this.$store.dispatch("add_Routes", json.data.sysMenuVoList);
                                 this.$router.replace({path: "/index"});
-                                // 登录日志功能
-                                var loginLog = {
-                                    ip: returnCitySN["cip"],
-                                    city: returnCitySN["cname"] + '-' + json.data.userInfo.userName + '-登陆'
-                                };
-
-                                apis.shiroApi.loginLog(loginLog);
                                 return;
                             } else if (json.message) {
                                 this.errorInfo.text = json.message;
@@ -99,12 +94,18 @@
                     .then((data) => {
                         console.log(data);
                     }).catch((err) => {
-                      console.log('error:', err);
-                      this.errorInfo.isShowError = true;
-                      this.errorInfo.text = '系统接口异常';
+                    console.log('error:', err);
+                    this.errorInfo.isShowError = true;
+                    this.errorInfo.text = '系统接口异常';
                 });
             }
-        }
+        },
+        // watch() { // watch是去监听一个值的变化，然后执行相对应的函数。
+        //
+        // },
+        // computed() { // computed是计算属性，也就是依赖其它的属性计算所得出最后的值
+        //
+        // }
     }
 </script>
 <!--scoped只让样式渲染本组件，不会全局渲染-->
