@@ -10,7 +10,24 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      // /try 开头的路径使用以下地址
+      '/try': {
+        target: "https://www.runoob.com/try",
+        changeOrigin: true,
+        pathRewrite: {
+          '^/try': ''
+        }
+      },
+      // /api 开头的路径使用以下地址
+      '/api': {
+        target: 'http://101ycy.com:10001',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

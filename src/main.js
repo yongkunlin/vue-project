@@ -4,9 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+// 使用element-ui插件
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+
 Vue.use(ElementUI);
+// 自定义的工具类
+import util from './common/util'
+
+Vue.use(util);
+
 
 Vue.config.productionTip = false
 
@@ -14,6 +21,6 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })
