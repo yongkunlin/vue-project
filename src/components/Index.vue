@@ -1,6 +1,6 @@
 <template>
   <div>
-    公告：
+    这是首页页签
   </div>
 </template>
 <script>

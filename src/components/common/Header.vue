@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="logo">
-          川办数据应用及管理平台
+          这是顶部
         </div>
         <!-- 折叠按钮 -->
         <div class="collapse-btn" @click="collapseChage">

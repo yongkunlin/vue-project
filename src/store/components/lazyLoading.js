@@ -27,7 +27,7 @@ const dynamicRouter = [
   {
     name: 'index',
     path: '/index',
-    component: resolve => require(['@/components/index.vue'], resolve),
+    component: resolve => require(['@/components/Index.vue'], resolve),
     meta: {
       title: '系统首页'
     }
@@ -163,7 +163,7 @@ const dynamicRouter = [
   {
     name: 'ckeditor',
     path: '/ckeditor',
-    component: resolve => require(['@/components/ckeditor/index.vue'], resolve),
+    component: resolve => require(['@/components/ckeditor/Index.vue'], resolve),
     meta: {title: '文本编辑器'}
   }
 ];
