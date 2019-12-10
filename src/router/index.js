@@ -1,16 +1,68 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Login from '@/components/Login'
 
-Vue.use(Router)
+Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'login',
-      component: Login
+      redirect: '/index'
+    },
+    {
+      path: '/login',
+      component: resolve => require(['@/components/login.vue'], resolve),
+      meta: {
+        title: '登陆'
+      }
+    },
+    {
+      path: '/tree',
+      component: resolve => require(['@/components/mayi/tree.vue'], resolve),
+      meta: {
+        title: '蚂蚁种树'
+      }
+    },
+    {
+      path: '/bottom',
+      component: resolve => require(['../components/flex/bottom.vue'], resolve)
+    },
+    {
+      path: '/404',
+      component: resolve => require(['../components/common/404.vue'], resolve)
+    },
+    {
+      path: '/403',
+      component: resolve => require(['../components/common/403.vue'], resolve)
+    },
+    {
+      path: '*',
+      redirect: '/404'
     }
-  ]
+  ],
+  mode: 'history'
 })
+
+//全局路由守卫
+router.beforeEach((to, from, next) => {
+  //debugger
+  console.log('跳转到:', to.fullPath);
+  if (to.path == '/tree') {
+    next();
+  } else {
+    var token = sessionStorage.getItem('token');
+    //如果没登录,都导向登录页
+    if (!token) {
+      if (to.path !== '/login') {
+        next({path: '/login'})
+      } else {
+        next();
+      }
+    } else {
+      next();
+    }
+  }
+
+});
+
+export default router;

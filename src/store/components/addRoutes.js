@@ -1,4 +1,4 @@
-// import ConvertRoutes from './convertRoutes'
+import ConvertRoutes from './convertRoutes'
 import router from '../../router'
 
 /**
@@ -22,24 +22,24 @@ const addRoutes = {
           title: '系统首页'
         }
       });
-      // let routeHideList = [];
-      // ConvertRoutes(routeList, routeHideList,routeParam); // 将后台的路由数据components转化成组件
-      // var rootRoute = [{
-      //   path: '/',
-      //   component: resolve => require(['@/components/Common/Home.vue'], resolve),
-      //   meta: {title: '自述文件'},
-      //   children: routeList
-      // }];
-      // //添加新窗口打开的页面
-      // if (routeHideList && routeHideList.length > 0) {
-      //   rootRoute = rootRoute.concat(routeHideList);
-      // }
-      // //保存路由参数到store中
-      // state.routeParam = routeParam;
-      // state.rootRoute = rootRoute;
-      // //动态添加路由
-      // router.addRoutes(rootRoute);
-      // console.log('输出路由:', JSON.stringify(rootRoute));
+      let routeHideList = [];
+      ConvertRoutes(routeList, routeHideList, routeParam); // 将后台的路由数据components转化成组件
+      var rootRoute = [{
+        path: '/',
+        component: resolve => require(['@/components/Common/Home.vue'], resolve),
+        meta: {title: '自述文件'},
+        children: routeList
+      }];
+      //添加新窗口打开的页面
+      if (routeHideList && routeHideList.length > 0) {
+        rootRoute = rootRoute.concat(routeHideList);
+      }
+      //保存路由参数到store中
+      state.routeParam = routeParam;
+      state.rootRoute = rootRoute;
+      //动态添加路由
+      router.addRoutes(rootRoute);
+      console.log('输出路由:', JSON.stringify(rootRoute));
     },
     add_Routes_Fresh(state) {
       //if(state.routeParam&&state.routeParam.length>0){

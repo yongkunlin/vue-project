@@ -24,7 +24,7 @@ const addMenus = {
             subs: []
           };
           var menuParam = params[i];
-          if (menuParam.isShow == 0) {
+          if (menuParam.isShow === 0) {
             continue;
           }
           menu.icon = menuParam.menuIcon;
